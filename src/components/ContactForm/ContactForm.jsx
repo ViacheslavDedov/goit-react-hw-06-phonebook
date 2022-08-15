@@ -1,9 +1,15 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { nanoid } from 'nanoid';
 import css from './ContactForm.module.css';
+import { actions } from 'redux/actions';
 
-const ContactForm = ({ onSubmit }) => {
-  const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+
+const ContactForm = () => {
+    const [name, setName] = useState('');
+    const [number, setNumber] = useState('');
+    const dispatch = useDispatch();
+    const contacts = useSelector(state => state.contacts.items);
     
 const handleChange = e => {
     const { name, value } = e.target;
@@ -18,17 +24,56 @@ const handleChange = e => {
             break;
     }
 };
+    
+// const changeFilter = e => {
+//     setFilter(e.currentTarget.value);
+//   }
 
-const handleSubmit = e => {
-    e.preventDefault();
-    onSubmit({name, number});
+//   const newContacts = () => {
+//     return contacts.filter(contact =>
+//       contact.name.toLowerCase().includes(filter.toLowerCase())
+//     );
+//   };
+
+//   const delContact = contactId => {
+//     newContacts(contacts.filter(contact => contact.id !== contactId),
+//     setFilter(''),
+//     );
+//   };
+
+//   const addName = ({ name, number }) => {
+    
+    
+const handleSubmit = evt => {
+    evt.preventDefault();
+    const contact = {
+      id: nanoid(),
+      name,
+      number,
+    };
+
+      if (contacts.some(contact => contact.name.toLowerCase() === name.toLowerCase())) {
+        return alert(`${contact.name} is already in contacts`);
+      }
+
+      if (contacts.some(contact => contact.number === number)) {
+        return alert(`${contact.number} is already in contacts`);
+      }
+
+    dispatch(actions.addContact(contact));
     resetForm();
-}
-
+  };
+//       return;
+//     }
+//     addName();
+//     setName('');
+//     setNumber('');
+//   };
+    
 const resetForm = () => {
     setName('');
     setNumber('');
-};
+    }
     
     return (
 
