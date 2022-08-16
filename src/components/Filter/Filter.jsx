@@ -1,4 +1,3 @@
-import React from 'react';
 import { useDispatch } from 'react-redux';
 import { actions } from 'redux/actions';
 import css from './Filter.module.css';

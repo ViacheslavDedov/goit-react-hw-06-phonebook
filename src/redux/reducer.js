@@ -1,4 +1,4 @@
-import { createReducer, combineReducers } from '@reduxjs/toolkit';
+import { combineReducers, createReducer } from '@reduxjs/toolkit';
 import { actions } from './actions';
 
 const items = createReducer([], {

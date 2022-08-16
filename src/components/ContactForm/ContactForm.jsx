@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import { nanoid } from 'nanoid';
-import css from './ContactForm.module.css';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { actions } from 'redux/actions';
+import css from './ContactForm.module.css';
 
 
 const ContactForm = () => {
@@ -25,25 +25,6 @@ const handleChange = e => {
     }
 };
     
-// const changeFilter = e => {
-//     setFilter(e.currentTarget.value);
-//   }
-
-//   const newContacts = () => {
-//     return contacts.filter(contact =>
-//       contact.name.toLowerCase().includes(filter.toLowerCase())
-//     );
-//   };
-
-//   const delContact = contactId => {
-//     newContacts(contacts.filter(contact => contact.id !== contactId),
-//     setFilter(''),
-//     );
-//   };
-
-//   const addName = ({ name, number }) => {
-    
-    
 const handleSubmit = evt => {
     evt.preventDefault();
     const contact = {
@@ -63,12 +44,6 @@ const handleSubmit = evt => {
     dispatch(actions.addContact(contact));
     resetForm();
   };
-//       return;
-//     }
-//     addName();
-//     setName('');
-//     setNumber('');
-//   };
     
 const resetForm = () => {
     setName('');
